@@ -1,0 +1,28 @@
+# 🛒 Selling Calculator
+
+Десктопное приложение для учета закупок, расходов и расчета чистой прибыли с современным неоновым интерфейсом в стиле Cyberpunk / Dark Dashboard.
+
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![PySide6](https://img.shields.io/badge/Qt-PySide6-41CD52?style=for-the-badge&logo=qt&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+
+---
+
+## 🌟 Основные возможности
+
+* **Учет поездок и закупок:** Добавление логистических расходов (транспорт, Новая Почта, прочее).
+* **Расчет метрик товара:** Автоматический расчет цены продажи, чистой прибыли и коэффициента эффективности по наценке (%).
+* **Динамический UI:**
+  * Интерактивный пересчет данных прямо в таблице.
+  * Цветовая индикация прибыли (зеленый для плюса `#10B981`, красный для убытка `#FF4D6D`).
+  * Анимированные кнопки с эффектом неонового свечения при наведении (`QPropertyAnimation` + `QGraphicsDropShadowEffect`).
+* **Локальное хранение данных:** Автоматическое сохранение структуры в базу данных SQLite.
+
+---
+
+## 🛠 Технологии
+
+* **Язык:** Python 3.10+
+* **GUI Фреймворк:** PySide6 (Qt for Python)
+* **Стилизация:** QSS (Qt Style Sheets) + Custom Graphics Effects
+* **База данных:** SQLite3

@@ -1,0 +1,16 @@
+# Виртуальное окружение
+.venv/
+env/
+venv/
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+
+# База данных SQLite (чтобы не пушить свои личные данные)
+*.db
+shop_calculator.db
+
+# Настройки VS Code / IDE
+.vscode/
+.idea/

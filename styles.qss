@@ -1,0 +1,165 @@
+/* --- ГЛОБАЛЬНЫЕ НАСТРОЙКИ --- */
+QWidget {
+    background-color: #121318;
+    color: #E2E8F0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+}
+
+/* --- ЗАГОЛОВОК --- */
+#mainTitle {
+    font-size: 26px;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: 0.5px;
+}
+
+/* --- КАРТОЧКИ KPI (КАК НА РЕФЕРЕНСЕ) --- */
+QFrame#kpiCard {
+    background-color: #1A1C23;
+    border: 1px solid #282B36;
+    border-radius: 16px;
+}
+
+QFrame#kpiCard:hover {
+    border: 1px solid #3E4254;
+    background-color: #1E2029;
+}
+
+QLabel#kpiTitle {
+    color: #8A8F9E;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+QLabel#kpiValue {
+    color: #FFFFFF;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* --- КНОПКИ С ЯРКИМИ ГРАДИЕНТАМИ --- */
+/* Главная кнопка (+ Добавить поездку) */
+QPushButton#primaryButton {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #FF512F, stop:1 #DD2476);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+}
+
+QPushButton#primaryButton:hover {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #FF613E, stop:1 #ED3486);
+}
+
+QPushButton#primaryButton:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #E04322, stop:1 #C81A65);
+}
+
+/* Кнопка удаления */
+QPushButton#deleteButton {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #3A1C28, stop:1 #281520);
+    color: #FF4D6D;
+    font-weight: 600;
+    border: 1px solid #5A2335;
+    border-radius: 12px;
+    padding: 10px 18px;
+}
+
+QPushButton#deleteButton:hover {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #FF2A55, stop:1 #D90429);
+    color: #FFFFFF;
+    border: 1px solid #FF2A55;
+}
+
+/* Вспомогательные кнопки (в диалогах) */
+QPushButton#secondaryButton {
+    background-color: #252834;
+    color: #A0A5B5;
+    font-weight: 600;
+    border: 1px solid #323646;
+    border-radius: 10px;
+    padding: 8px 16px;
+}
+
+QPushButton#secondaryButton:hover {
+    background-color: #2D3142;
+    color: #FFFFFF;
+}
+
+/* --- ПОЛЕ ПОИСКА И ВВОДА --- */
+QLineEdit {
+    background-color: #1A1C23;
+    border: 1px solid #282B36;
+    border-radius: 12px;
+    padding: 10px 16px;
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+QLineEdit:focus {
+    border: 1px solid #FF4D6D;
+    background-color: #1E2029;
+}
+
+/* --- ТАБЛИЦА --- */
+QTableWidget {
+    background-color: #1A1C23;
+    border: 1px solid #282B36;
+    border-radius: 16px;
+    gridline-color: #232631;
+    outline: none;
+}
+
+QTableWidget::item {
+    padding: 10px;
+    border-bottom: 1px solid #232631;
+    color: #E2E8F0;
+}
+
+QTableWidget::item:selected {
+    background-color: #282C3C;
+    color: #FFFFFF;
+}
+
+/* Шапка таблицы */
+QHeaderView::section {
+    background-color: #14151B;
+    color: #717789;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    border: none;
+    border-bottom: 2px solid #282B36;
+    padding: 12px;
+}
+
+QTableCornerButton::section {
+    background-color: #14151B;
+    border: none;
+}
+
+/* Скроллбары */
+QScrollBar:vertical {
+    background: #121318;
+    width: 8px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical {
+    background: #2D3142;
+    border-radius: 4px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #FF4D6D;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+}
