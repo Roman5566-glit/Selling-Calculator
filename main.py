@@ -1,16 +1,26 @@
+import os
 import sys
 from PySide6.QtWidgets import QApplication
 from ui import MainWindow
 
-if __name__ == "__main__":
+
+def resource_path(relative_path):
+  """Получает путь к файлу внутри временной папки PyInstaller"""
+  if hasattr(sys, '_MEIPASS'):
+    return os.path.join(sys._MEIPASS, relative_path)
+  return os.path.join(os.path.abspath('.'), relative_path)
+
+
+if __name__ == '__main__':
   app = QApplication(sys.argv)
 
-  # Загрузка и применение стилей
+  # Путь к файлу стилей
+  qss_path = resource_path('styles.qss')
   try:
-    with open("styles.qss", "r", encoding="utf-8") as f:
+    with open(qss_path, 'r', encoding='utf-8') as f:
       app.setStyleSheet(f.read())
-  except FileNotFoundError:
-    pass
+  except Exception as e:
+    print(f'Ошибка загрузки стилей: {e}')
 
   window = MainWindow()
   window.show()
