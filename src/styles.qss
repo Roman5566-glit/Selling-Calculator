@@ -163,3 +163,25 @@ QScrollBar::handle:vertical:hover {
 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
     height: 0px;
 }
+
+/* Фикс полей ввода (QLineEdit) во всей программе */
+QLineEdit {
+    color: #FFFFFF !important;              /* Белый цвет текста */
+    background-color: #1E1E2E !important;    /* Тёмный фон */
+    selection-background-color: #FF4D6D;    /* Цвет выделения */
+    selection-color: #FFFFFF;
+    border: 1px solid #3F3F5A;
+    border-radius: 6px;
+    padding: 4px 8px;                       /* Отступы, чтобы текст не вылезал */
+    font-size: 13px;
+}
+
+/* Фикс редактора внутри ячеек QTableWidget (когда кликаешь дважды) */
+QTableWidget QLineEdit {
+    background-color: #2A2A3D !important;
+    color: #FFFFFF !important;
+    border: 1px solid #FF4D6D !important;   /* Яркая рамка при редактировании */
+    padding: 0px 4px;
+    margin: 0px;
+}
+

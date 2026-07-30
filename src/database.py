@@ -29,9 +29,20 @@ class Database:
                     name TEXT NOT NULL,
                     buy_price REAL NOT NULL,
                     markup REAL NOT NULL,
+                    status INTEGER NOT NULL DEFAULT 0,
                     FOREIGN KEY (trip_id) REFERENCES trips (id) ON DELETE CASCADE
                 )
             """)
+      conn.commit()
+
+      # Migration: ensure 'status' column exists for older DBs
+      cursor.execute("PRAGMA table_info(items)")
+      cols = [row[1] for row in cursor.fetchall()]
+      if "status" not in cols:
+        try:
+          cursor.execute("ALTER TABLE items ADD COLUMN status INTEGER NOT NULL DEFAULT 0")
+        except Exception:
+          pass
       conn.commit()
 
   def add_trip(self, name: str, expenses: float, items: list) -> int:
@@ -44,12 +55,13 @@ class Database:
       trip_id = cursor.lastrowid
 
       for item in items:
+        status = int(item.get("status", 0))
         cursor.execute(
-            """
-                    INSERT INTO items (trip_id, name, buy_price, markup)
-                    VALUES (?, ?, ?, ?)
-                """,
-            (trip_id, item["name"], item["buy_price"], item["markup"]),
+          """
+              INSERT INTO items (trip_id, name, buy_price, markup, status)
+              VALUES (?, ?, ?, ?, ?)
+            """,
+          (trip_id, item["name"], item["buy_price"], item["markup"], status),
         )
 
       conn.commit()
@@ -77,6 +89,23 @@ class Database:
       )
       conn.commit()
 
+  def update_item_status(self, item_id: int, status: int):
+    """Update item status (0 - in stock, 1 - sold)."""
+    with self.get_connection() as conn:
+      cursor = conn.cursor()
+      cursor.execute("UPDATE items SET status = ? WHERE id = ?", (int(status), item_id))
+      conn.commit()
+
+  def update_trip_expenses(self, trip_id: int, expenses: float):
+    """Обновляет общие расходы по поездке."""
+    with self.get_connection() as conn:
+      cursor = conn.cursor()
+      cursor.execute(
+          "UPDATE trips SET expenses = ? WHERE id = ?",
+          (expenses, trip_id),
+      )
+      conn.commit()
+
   def get_all_data(self):
     """Возвращает все поездки вместе со списком их товаров."""
     with self.get_connection() as conn:
@@ -87,17 +116,17 @@ class Database:
       result = []
       for t_id, t_name, t_exp in trips_rows:
         cursor.execute(
-            """
-                    SELECT id, name, buy_price, markup 
-                    FROM items WHERE trip_id = ? ORDER BY id ASC
-                """,
-            (t_id,),
+          """
+              SELECT id, name, buy_price, markup, status 
+              FROM items WHERE trip_id = ? ORDER BY id ASC
+            """,
+          (t_id,),
         )
         items_rows = cursor.fetchall()
 
         items = [
-            {"id": i_id, "name": i_name, "buy_price": i_buy, "markup": i_markup}
-            for i_id, i_name, i_buy, i_markup in items_rows
+          {"id": i_id, "name": i_name, "buy_price": i_buy, "markup": i_markup, "status": int(i_status)}
+          for i_id, i_name, i_buy, i_markup, i_status in items_rows
         ]
 
         result.append({
